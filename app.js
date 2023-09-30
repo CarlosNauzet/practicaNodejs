@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const Productos = require("./models/Product");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -22,11 +23,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
 // crear nuestra primera ruta-test
 app.get("/api/v1/test", (req, res) => {
   console.log(req);
   res.send("test-route");
 });
+
+// ruta para todos los productos
+app.get("/api/v1/productos", async (req, res) => {
+  const productos = await Productos.find();
+  res.status(200).json(productos);
+});
+
+// ruta para crear un producto
+
+app.post("/api/v1/productos", async (req, res) => {
+  console.log(req.body);
+});
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
