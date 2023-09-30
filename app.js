@@ -7,6 +7,10 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
+// connectas a la BBDD
+const connectiondb = require("./database/connectdb");
+connectiondb();
+
 var app = express();
 
 // view engine setup
