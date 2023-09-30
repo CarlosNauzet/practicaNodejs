@@ -39,7 +39,12 @@ app.get("/api/v1/productos", async (req, res) => {
 // ruta para crear un producto
 
 app.post("/api/v1/productos", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
+  const newProduct = await Productos.create(req.body);
+  res.status(201).json({
+    msg: "producto creado",
+    newProduct,
+  });
 });
 
 app.use("/", indexRouter);
