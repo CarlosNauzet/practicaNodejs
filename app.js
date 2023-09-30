@@ -65,6 +65,12 @@ app.get("/api/v1/tags", async (req, res) => {
   });
 });
 
+// ruta para borrar un producto
+
+app.delete("/api/v1/productos/:id", async (req, res) => {
+  console.log(req.params);
+});
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
