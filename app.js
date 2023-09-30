@@ -66,9 +66,19 @@ app.get("/api/v1/tags", async (req, res) => {
 });
 
 // ruta para borrar un producto
-
 app.delete("/api/v1/productos/:id", async (req, res) => {
-  console.log(req.params);
+  const id = req.params.id;
+  const respuesta = await Productos.findByIdAndDelete(id);
+  if (!respuesta) {
+    res.status(404).json({
+      msg: "No encontrado el producto a borrar",
+    });
+  } else {
+    res.status(200).json({
+      msg: "producto borrado con éxito",
+      respuesta,
+    });
+  }
 });
 
 app.use("/", indexRouter);
