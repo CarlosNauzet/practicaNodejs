@@ -47,6 +47,16 @@ app.post("/api/v1/productos", async (req, res) => {
   });
 });
 
+// ruta para lista los tagas existentes
+
+app.get("/api/v1/tags", async (req, res) => {
+  const productos = await Productos.find();
+  const tags = productos.map((producto) => {
+    return producto.tags;
+  });
+  console.log(tags);
+});
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
