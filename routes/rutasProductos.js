@@ -1,10 +1,8 @@
 const express = require("express");
 const Productos = require("../models/Product");
+const todosLosProductos = require("../controllers/controladorProductos");
 
 const router = express.Router();
-router.get("/", async (req, res) => {
-  const productos = await Productos.find();
-  res.status(200).json(productos);
-});
+router.get("/", todosLosProductos);
 
 module.exports = router;
