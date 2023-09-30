@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const Productos = require("./models/Product");
+const _ = require("lodash");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -47,14 +48,21 @@ app.post("/api/v1/productos", async (req, res) => {
   });
 });
 
-// ruta para lista los tagas existentes
+// ruta para lista los tags existentes
 
 app.get("/api/v1/tags", async (req, res) => {
   const productos = await Productos.find();
-  const tags = productos.map((producto) => {
+  // const tags = productos.map((producto) => {
+  //   return producto.tags;
+  // });
+  const tags = productos.flatMap((producto) => {
     return producto.tags;
   });
-  console.log(tags);
+  const tagsUnicos = _.uniq(tags);
+  res.status(200).json({
+    msg: "tags únicos",
+    tagsUnicos,
+  });
 });
 
 app.use("/", indexRouter);
