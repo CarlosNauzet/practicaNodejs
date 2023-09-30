@@ -6,6 +6,9 @@ var logger = require("morgan");
 const Productos = require("./models/Product");
 const _ = require("lodash");
 
+// router
+const rutasProducto = require("./routes/rutasProductos");
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
@@ -31,11 +34,8 @@ app.get("/api/v1/test", (req, res) => {
   res.send("test-route");
 });
 
-// ruta para todos los productos
-app.get("/api/v1/productos", async (req, res) => {
-  const productos = await Productos.find();
-  res.status(200).json(productos);
-});
+// ruta para todos los productos (cambiamos a USE porque el get está en el router (rutasProducto))
+app.use("/api/v1/productos", rutasProducto);
 
 // ruta para crear un producto
 
