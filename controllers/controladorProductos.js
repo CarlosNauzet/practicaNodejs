@@ -14,6 +14,15 @@ const todosLosProductos = async (req, res) => {
   if (req.query.seVende) {
     filtros.seVende = req.query.seVende;
   }
+  if (req.query.tags) {
+    console.log(req.query.tags);
+    const arrayTags = req.query.tags.split(",");
+    console.log(arrayTags);
+    filtros.tags = {
+      $in: arrayTags,
+    };
+    console.log(filtros.tags);
+  }
 
   console.log(filtros);
   const productos = await Productos.find(filtros);
