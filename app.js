@@ -34,22 +34,6 @@ app.use("/api/v1/test", rutaTest);
 // ruta para todos los productos (cambiamos a USE porque el get/post está en el router (rutasProducto)
 app.use("/api/v1/productos", rutasProducto);
 
-// ruta para borrar un producto
-app.delete("/api/v1/productos/:id", async (req, res) => {
-  const id = req.params.id;
-  const respuesta = await Productos.findByIdAndDelete(id);
-  if (!respuesta) {
-    res.status(404).json({
-      msg: "No encontrado el producto a borrar",
-    });
-  } else {
-    res.status(200).json({
-      msg: "producto borrado con éxito",
-      respuesta,
-    });
-  }
-});
-
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 

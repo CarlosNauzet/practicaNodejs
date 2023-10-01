@@ -13,4 +13,7 @@ router.post("/", controladorProductos.crearProductos);
 // router para los tags
 router.get("/tags", controladorProductos.tagsUnicos);
 
+// router para borrar productos
+router.delete("/:id", controladorProductos.borrarProductos);
+
 module.exports = router;
