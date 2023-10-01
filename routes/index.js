@@ -5,9 +5,8 @@ const Productos = require("../models/Product");
 /* GET home page. */
 router.get("/", async function (req, res, next) {
   const productos = await Productos.find();
-  res.locals.productos = productos;
   console.log(productos);
-  res.render("index", { title: "Express" });
+  res.render("index", { title: "Express", productos });
 });
 
 module.exports = router;
