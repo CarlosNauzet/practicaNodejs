@@ -1,8 +1,16 @@
 const express = require("express");
 const Productos = require("../models/Product");
-const todosLosProductos = require("../controllers/controladorProductos");
+const controladorProductos = require("../controllers/controladorProductos");
 
 const router = express.Router();
-router.get("/", todosLosProductos);
+
+// router todos los productos
+router.get("/", controladorProductos.todosLosProductos);
+
+// router crear productos
+router.post("/", controladorProductos.crearProductos);
+
+// router para los tags
+router.get("/tags", controladorProductos.tagsUnicos);
 
 module.exports = router;

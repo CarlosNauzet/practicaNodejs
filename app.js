@@ -4,7 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const Productos = require("./models/Product");
-const _ = require("lodash");
 
 // router
 const rutasProducto = require("./routes/rutasProductos");
@@ -32,35 +31,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // crear nuestra primera ruta-test
 app.use("/api/v1/test", rutaTest);
 
-// ruta para todos los productos (cambiamos a USE porque el get está en el router (rutasProducto))
+// ruta para todos los productos (cambiamos a USE porque el get/post está en el router (rutasProducto)
 app.use("/api/v1/productos", rutasProducto);
-
-// ruta para crear un producto
-app.post("/api/v1/productos", async (req, res) => {
-  // console.log(req.body);
-  const newProduct = await Productos.create(req.body);
-  res.status(201).json({
-    msg: "producto creado",
-    newProduct,
-  });
-});
-
-// ruta para lista los tags existentes
-
-app.get("/api/v1/tags", async (req, res) => {
-  const productos = await Productos.find();
-  // const tags = productos.map((producto) => {
-  //   return producto.tags;
-  // });
-  const tags = productos.flatMap((producto) => {
-    return producto.tags;
-  });
-  const tagsUnicos = _.uniq(tags);
-  res.status(200).json({
-    msg: "tags únicos",
-    tagsUnicos,
-  });
-});
 
 // ruta para borrar un producto
 app.delete("/api/v1/productos/:id", async (req, res) => {
