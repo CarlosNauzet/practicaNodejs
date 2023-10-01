@@ -8,6 +8,7 @@ const _ = require("lodash");
 
 // router
 const rutasProducto = require("./routes/rutasProductos");
+const rutaTest = require("./routes/rutaTest");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -29,16 +30,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // crear nuestra primera ruta-test
-app.get("/api/v1/test", (req, res) => {
-  console.log(req);
-  res.send("test-route");
-});
+app.use("/api/v1/test", rutaTest);
 
 // ruta para todos los productos (cambiamos a USE porque el get está en el router (rutasProducto))
 app.use("/api/v1/productos", rutasProducto);
 
 // ruta para crear un producto
-
 app.post("/api/v1/productos", async (req, res) => {
   // console.log(req.body);
   const newProduct = await Productos.create(req.body);
