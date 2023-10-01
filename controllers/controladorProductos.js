@@ -11,6 +11,9 @@ const todosLosProductos = async (req, res) => {
   if (req.query.precio) {
     filtros.precio = req.query.precio;
   }
+  if (req.query.seVende) {
+    filtros.seVende = req.query.seVende;
+  }
 
   console.log(filtros);
   const productos = await Productos.find(filtros);
