@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Nodepop</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %>
-      <h2>productos</h2>
+    <h1>Encuentra lo que buscas en Nodepop</h1>
+    <p>Bienvenido a Nodepop
+      <h2>Productos</h2>
+      <div class="productos">
       <% productos.forEach(producto => {%>
-        <p><%= producto.nombre %></p>
+        
+          <div class="producto">
+          <div class="line"><h3>Producto</h3><p><%= producto.nombre %></p></div>
+    
+          <div class="line"><h3>Precio</h3><p><%= producto.precio %></p></div>
+          
+          <div class="line"><h3>Estado</h3>
+            
+            <% if (producto.seVende) { %>
+              <p>Se vende</p>
+              <%} else {  %>
+                <p>Se compra</p>
+                <%} %>
+              </div>
+          
+          <div class="line"><h3>Tags</h3><p><%= producto.tags %></p></div>
+          </div>
       <%} )%>
+    </div>
     </p>
   </body>
 </html>
+
+<!--mostras condicionales con el precio ( if se vende = true , 
+if sevende = false (se busca))-->

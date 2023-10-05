@@ -1,8 +1,12 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.productos {
+  display: flex;
+  width: 100vw;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-a {
-  color: #00B7FF;
+.producto {
+  width: 300px;
+  border: 1px solid black;
+  padding: 1rem 2rem;
 }
