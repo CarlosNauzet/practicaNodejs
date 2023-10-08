@@ -16,4 +16,7 @@ router.get("/tags", controladorProductos.tagsUnicos);
 // router para borrar productos
 router.delete("/:id", controladorProductos.borrarProductos);
 
+// router para actualizar los productos
+//
+
 module.exports = router;

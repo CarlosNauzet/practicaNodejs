@@ -25,53 +25,91 @@ const todosLosProductos = async (req, res) => {
   }
 
   console.log(filtros);
-  const productos = await Productos.find(filtros);
-  res.status(200).json(productos);
+
+  // aquí el try: sirve para algo = evitar errores de BBDD
+  try {
+    const productos = await Productos.find(filtros);
+    res.status(200).json(productos);
+  } catch (error) {
+    res.status(400),
+      json({
+        msg: error.message,
+      });
+  }
 };
 
 // controlador para crear productos
 const crearProductos = async (req, res) => {
-  // console.log(req.body);
-  const newProduct = await Productos.create(req.body);
-  res.status(201).json({
-    msg: "producto creado",
-    newProduct,
-  });
+  // console.log(req.body); VALIDACION DESDE CONTROLADOR
+  //  if (!req.body.nombre) {
+  //   res.status(400).json({
+  //     msg: "Error antes del try",
+  //   });
+  // }
+  try {
+    const newProduct = await Productos.create(req.body);
+    res.status(201).json({
+      msg: "producto creado",
+      newProduct,
+    });
+  } catch (error) {
+    res.status(400).json({
+      msg: error.message,
+    });
+    console.log(error);
+  }
 };
 
 //controlador para los tags únicos
 
 const tagsUnicos = async (req, res) => {
-  const productos = await Productos.find();
-  // const tags = productos.map((producto) => {
-  //   return producto.tags;
-  // });
+  //  arregla el try catch aqui -pero como pruebo el error? valdría para cuando els ervidor falla
+  try {
+    const productos = await Productos.find();
+    // const tags = productos.map((producto) => {
+    //   return producto.tags;
+    // });
 
-  const tags = productos.flatMap((producto) => {
-    return producto.tags;
-  });
-  const tagsUnicos = _.uniq(tags);
-  res.status(200).json({
-    msg: "tags únicos",
-    tagsUnicos,
-  });
+    const tags = productos.flatMap((producto) => {
+      return producto.tags;
+    });
+    const tagsUnicos = _.uniq(tags);
+    res.status(200).json({
+      msg: "tags únicos",
+      tagsUnicos,
+    });
+  } catch (error) {
+    res.status(400),
+      json({
+        msg: error.message,
+      });
+  }
 };
 
 // controlador para borrar productos
 const borrarProductos = async (req, res) => {
   const id = req.params.id;
-  const respuesta = await Productos.findByIdAndDelete(id);
-  if (!respuesta) {
-    res.status(404).json({
-      msg: "No encontrado el producto a borrar",
+  try {
+    const respuesta = await Productos.findByIdAndDelete(id);
+    if (!respuesta) {
+      res.status(404).json({
+        msg: "No encontrado el producto a borrar",
+      });
+    } else {
+      res.status(200).json({
+        msg: "producto borrado con éxito",
+        respuesta,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      msg: error.message,
     });
-  } else {
-    res.status(200).json({
-      msg: "producto borrado con éxito",
-      respuesta,
-    });
+    console.log(error);
   }
 };
+
+// Pendiente: UPDATE productos
 
 module.exports = {
   todosLosProductos,
