@@ -9,6 +9,7 @@ const dbconnect = async function connectdb() {
     console.log("Productos anteriores eliminados");
     await Productos.insertMany(productos);
     console.log("Productos insertados");
+    mongoose.disconnect();
   } catch (error) {
     console.log(error);
   }
