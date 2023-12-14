@@ -14,7 +14,27 @@ const signup = async (req, res) => {
   }
 };
 const login = async (req, res) => {
-  res.json("login");
+  const { email, password } = req.body;
+  try {
+    const user = await Usuario.findOne({ email });
+    if (!user)
+      return res.status(404).json({
+        msg: `Email o Password incorrectos`,
+      });
+    if (user.password !== password)
+      return res.status(401).json({
+        msg: `Email o Password incorrectos`,
+      });
+    res.status(200).json({
+      msg: "usuario autenticado",
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      msg: error.message,
+    });
+  }
 };
 
 module.exports = {
