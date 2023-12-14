@@ -31,10 +31,9 @@ const todosLosProductos = async (req, res) => {
     const productos = await Productos.find(filtros);
     res.status(200).json(productos);
   } catch (error) {
-    res.status(400),
-      json({
-        msg: error.message,
-      });
+    res.status(400).json({
+      msg: error.message,
+    });
   }
 };
 

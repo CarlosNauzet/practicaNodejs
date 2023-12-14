@@ -37,12 +37,12 @@ app.use(i18n.init);
 app.use("/api/v1/test", rutaTest);
 
 // ruta para todos los productos (cambiamos a USE porque el get/post está en el router (rutasProducto)
+app.use("/api/v1/auth", rutasAuth);
 app.use("/api/v1/productos", rutasProducto);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/change-locale", rutaLocale);
-app.use("/auth", rutasAuth);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
