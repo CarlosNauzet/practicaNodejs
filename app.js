@@ -10,6 +10,7 @@ const i18n = require("./config/i18nConfig");
 const rutasProducto = require("./routes/rutasProductos");
 const rutaTest = require("./routes/rutaTest");
 const rutaLocale = require("./routes/changeLocale");
+const rutasAuth = require("./routes/auth");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -41,6 +42,7 @@ app.use("/api/v1/productos", rutasProducto);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/change-locale", rutaLocale);
+app.use("/auth", rutasAuth);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
