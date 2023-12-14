@@ -6,6 +6,9 @@
   </head>
   <body>
     <h1><%= __("Encuentra lo que buscas en Nodepop") %></h1>
+    <% getLocales().forEach(locale => { %>
+        <a href="/change-locale/<%= locale %>"><%= locale %></a> &nbsp;
+      <% }) %>
     <p><%= __("Bienvenido a Nodepop") %> </p>
       <h2><%= __("Productos") %></h2>
       <div class="productos">
