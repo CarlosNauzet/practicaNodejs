@@ -4,10 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const Productos = require("./models/Product");
+const i18n = require("./config/i18nConfig");
 
 // router
 const rutasProducto = require("./routes/rutasProductos");
 const rutaTest = require("./routes/rutaTest");
+const rutaLocale = require("./routes/changeLocale");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -28,6 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(i18n.init);
+
 // crear nuestra primera ruta-test
 app.use("/api/v1/test", rutaTest);
 
@@ -36,6 +40,7 @@ app.use("/api/v1/productos", rutasProducto);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/change-locale", rutaLocale);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

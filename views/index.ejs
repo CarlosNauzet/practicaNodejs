@@ -5,9 +5,9 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Encuentra lo que buscas en Nodepop</h1>
-    <p>Bienvenido a Nodepop
-      <h2>Productos</h2>
+    <h1><%= __("Encuentra lo que buscas en Nodepop") %></h1>
+    <p><%= __("Bienvenido a Nodepop") %> </p>
+      <h2><%= __("Productos") %></h2>
       <div class="productos">
       <% productos.forEach(producto => {%>
         
@@ -15,16 +15,16 @@
             <div class="imagen">
               <img src="/images/<%= producto.foto %>"/>
             </div>
-          <div class="line"><h3>Producto</h3><p><%= producto.nombre %></p></div>
+          <div class="line"><h3><%= __("Producto") %></h3><p><%= producto.nombre %></p></div>
     
-          <div class="line"><h3>Precio</h3><p><%= producto.precio %></p></div>
+          <div class="line"><h3><%= __("Precio") %></h3><p><%= producto.precio %></p></div>
           
-          <div class="line"><h3>Estado</h3>
+          <div class="line"><h3><% __("Estado") %></h3>
             
             <% if (producto.seVende) { %>
-              <p>Se vende</p>
+              <p><%= __("Se vende") %></p>
               <%} else {  %>
-                <p>Se compra</p>
+                <p><%= __("Se compra") %></p>
                 <%} %>
               </div>
           
