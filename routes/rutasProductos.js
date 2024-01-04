@@ -1,20 +1,23 @@
 const express = require("express");
 const Productos = require("../models/Product");
 const controladorProductos = require("../controllers/controladorProductos");
+const authMiddleware = require("../middleware/jwtMiddleware");
 
 const router = express.Router();
+// router.use(authMiddleware); PARA TODAS LAS RUTAS
 
 // router todos los productos
-router.get("/", controladorProductos.todosLosProductos);
+
+router.get("/", authMiddleware, controladorProductos.todosLosProductos);
 
 // router crear productos
-router.post("/", controladorProductos.crearProductos);
+router.post("/", authMiddleware, controladorProductos.crearProductos);
 
 // router para los tags
 router.get("/tags", controladorProductos.tagsUnicos);
 
 // router para borrar productos
-router.delete("/:id", controladorProductos.borrarProductos);
+router.delete("/:id", authMiddleware, controladorProductos.borrarProductos);
 
 // router para actualizar los productos
 //

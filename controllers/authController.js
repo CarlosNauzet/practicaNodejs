@@ -1,7 +1,11 @@
 const Usuario = require("../models/User");
+const jwt = require("jsonwebtoken");
+require("dotenv/config");
 const signup = async (req, res) => {
   try {
-    const newUser = await Usuario.create(req.body);
+    const newUser = new Usuario(req.body);
+    newUser.password = await Usuario.hashPassword(req.body.password);
+    await newUser.save();
     res.status(201).json({
       msg: "usuario creado",
       newUser,
@@ -21,13 +25,20 @@ const login = async (req, res) => {
       return res.status(404).json({
         msg: `Email o Password incorrectos`,
       });
-    if (user.password !== password)
+    const isCorrectPassword = await user.comparePasswords(password);
+    if (!isCorrectPassword)
       return res.status(401).json({
         msg: `Email o Password incorrectos`,
       });
+
+    const tokenJwt = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "2d" }
+    );
     res.status(200).json({
       msg: "usuario autenticado",
-      user,
+      tokenJwt,
     });
   } catch (error) {
     console.log(error);

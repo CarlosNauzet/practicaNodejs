@@ -48,7 +48,7 @@ const crearProductos = async (req, res) => {
   try {
     const newProduct = await Productos.create(req.body);
     res.status(201).json({
-      msg: "producto creado",
+      msg: `Producto creado por usario con ${req.body.id} y con email ${req.body.email}`,
       newProduct,
     });
   } catch (error) {
