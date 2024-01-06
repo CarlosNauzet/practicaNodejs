@@ -45,6 +45,11 @@ const crearProductos = async (req, res) => {
   //     msg: "Error antes del try",
   //   });
   // }
+
+  console.log({ bodyAntes: req.body });
+  req.body.foto = req.file.filename;
+  console.log({ bodyDespues: req.body });
+
   try {
     const newProduct = await Productos.create(req.body);
     res.status(201).json({

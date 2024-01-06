@@ -15,6 +15,7 @@ const jwtMiddleware = async (req, res, next) => {
       console.log({ payload });
       req.body.id = payload.id;
       req.body.email = payload.email;
+      console.log({ body: req.body });
       next();
     });
   } catch (error) {
