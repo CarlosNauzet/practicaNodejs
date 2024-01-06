@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
+const { Requester } = require("cote");
 
 // Validaciones hechas en el modelo de Moogose
+const requester = new Requester({
+  name: "thumbnail-microservice-requester",
+});
 const ProductSchema = new mongoose.Schema({
   nombre: {
     type: String,
@@ -28,6 +32,17 @@ const ProductSchema = new mongoose.Schema({
     },
   ],
 });
+
+ProductSchema.methods.createThumbnail = async function () {
+  const event = {
+    type: "create-thumbnail",
+    fileName: this.foto,
+    test: "testeando requester",
+  };
+  return new Promise((resolve) => {
+    requester.send(event, resolve);
+  });
+};
 
 const Producto = mongoose.model("Product", ProductSchema);
 

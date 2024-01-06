@@ -2,10 +2,14 @@ const { Responder } = require("cote");
 const path = require("path");
 const jimp = require("jimp");
 
-const main = async (fileName) => {
+const main = async () => {
   try {
-    const responder = new Responder({ name: "thumbnail-microservice" });
+    const responder = new Responder({
+      name: "thumbnail-microservice-responder",
+    });
     responder.on("create-thumbnail", async (req, done) => {
+      console.log({ req });
+      const { fileName } = req;
       const imagePath = path.join(
         __dirname,
         "..",
@@ -29,3 +33,5 @@ const main = async (fileName) => {
     console.log(error);
   }
 };
+
+main();

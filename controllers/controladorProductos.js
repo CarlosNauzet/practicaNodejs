@@ -46,12 +46,11 @@ const crearProductos = async (req, res) => {
   //   });
   // }
 
-  console.log({ bodyAntes: req.body });
   req.body.foto = req.file.filename;
-  console.log({ bodyDespues: req.body });
 
   try {
     const newProduct = await Productos.create(req.body);
+    await newProduct.createThumbnail();
     res.status(201).json({
       msg: `Producto creado por usario con ${req.body.id} y con email ${req.body.email}`,
       newProduct,
