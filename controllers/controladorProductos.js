@@ -1,3 +1,4 @@
+const Producto = require("../models/Product");
 const Productos = require("../models/Product");
 const _ = require("lodash");
 
@@ -114,9 +115,26 @@ const borrarProductos = async (req, res) => {
 
 // Pendiente: UPDATE productos
 
+const updateProductos = async (req, res) => {
+  console.log(req.body);
+  const { id } = req.params;
+  console.log({ id });
+  if (req.file) req.body.foto = req.file.filename;
+  try {
+    const updatedProduct = await Productos.findByIdAndUpdate(id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   todosLosProductos,
   crearProductos,
   tagsUnicos,
   borrarProductos,
+  updateProductos,
 };

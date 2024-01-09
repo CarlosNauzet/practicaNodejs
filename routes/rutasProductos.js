@@ -28,6 +28,11 @@ router.get("/tags", controladorProductos.tagsUnicos);
 router.delete("/:id", authMiddleware, controladorProductos.borrarProductos);
 
 // router para actualizar los productos
-//
+router.patch(
+  "/:id",
+  authMiddleware,
+  upload.single("foto"),
+  controladorProductos.updateProductos
+);
 
 module.exports = router;
