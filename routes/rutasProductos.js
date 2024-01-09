@@ -10,7 +10,7 @@ const router = express.Router();
 
 // router todos los productos
 
-router.get("/", authMiddleware, controladorProductos.todosLosProductos);
+router.get("/", controladorProductos.todosLosProductos);
 
 // router crear productos
 router.post(
