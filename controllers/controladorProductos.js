@@ -113,7 +113,7 @@ const borrarProductos = async (req, res) => {
   }
 };
 
-// Pendiente: UPDATE productos
+// Pendiente anterior práctica: UPDATE productos
 
 const updateProductos = async (req, res) => {
   console.log(req.body);
