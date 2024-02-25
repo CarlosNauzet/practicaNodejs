@@ -1,3 +1,12 @@
+### Update practica Despliegue en Servidor
+El servicio de la práctica de Backend con Node se encuentra desplegado en la siguiente IP:
+http://51.21.47.27 
+
+El Frontend de la práctica de React se encuentra desplegado en la siguiente DNS:
+http://ec2-51-21-47-27.eu-north-1.compute.amazonaws.com
+
+
+
 # practicaNodejs
 
 Práctica Desarrollo de backend con NodeJs para el bootcamp Full Stack 2023 Keep Coding
